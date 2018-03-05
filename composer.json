@@ -1,0 +1,19 @@
+{
+    "name": "jan/fairshare",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan",
+            "email": "mail@janchristlieb.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "fzaninotto/faker": "^1.7",
+        "twig/twig": "^2.0"
+    }
+}
