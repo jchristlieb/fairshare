@@ -61,7 +61,7 @@ class Router
         // iterate through all routes defined in index.php
         foreach (self::$routes as $route) {
             
-            // Add infront off $route['expression'] e.g /dashboard
+            // Add in front off $route['expression'] e.g /dashboard
             // a '^' -> this reg ex indicates the start of the string
             $route['expression'] = '^' . $route['expression'];
             

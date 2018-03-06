@@ -11,10 +11,13 @@ require_once dirname(__DIR__) . '/app/bootstrap.php';
 Router::init();
 
 // route to dashboard 
-Router::add('/PhpKurs2/fairshare/web/dashboard.php', [\App\Controller\IndexController::class, 'index']);
+Router::add('/', [\App\Controller\IndexController::class, 'index']);
 
 // route to expense
 Router::add('/expense', [\App\Controller\ExpenseController::class, 'index']);
+
+// route to calc fairShare
+Router::add('/calc-1', [\App\Controller\CalcController::class, 'index']);
 
 // 404page
 Router::add404(function () {

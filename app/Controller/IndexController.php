@@ -6,6 +6,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        echo $this->twig->render('dashboard.twig', ['name' => 'World']);
+        echo $this->twig->render('/pages/dashboard.twig', ['name' => 'World']);
     }
 }
