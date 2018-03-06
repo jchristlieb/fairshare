@@ -7,5 +7,4 @@
     * different xxamp settings, I think it is not automatically looking for an index.php
 6. Class Route, method run(): 
     * preg_match function -> why are we concatenating `$route['expression']` with `#`
-    *
 
