@@ -28,6 +28,7 @@ class Router
             self::$path = '/';
         }
     }
+    
 
     /**
      * Adds a new route to the router
@@ -87,3 +88,5 @@ class Router
     }
 
 }
+
+
