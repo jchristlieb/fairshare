@@ -2,10 +2,11 @@
 
 namespace App\Model;
 
-class Expense
+class Expense extends Model
 {
-    public function __construct()
+    public function getSource()
     {
-        echo 'This is the expense constructor';
+        return 'expenses';
     }
+
 }

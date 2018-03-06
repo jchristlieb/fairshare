@@ -15,6 +15,7 @@ Router::add('/', [\App\Controller\IndexController::class, 'index']);
 
 // route to expense
 Router::add('/expense', [\App\Controller\ExpenseController::class, 'index']);
+Router::add('/expense/save', [\App\Controller\ExpenseController::class, 'save']);
 
 // route to calc fairShare
 Router::add('/calc-1', [\App\Controller\CalcController::class, 'index']);

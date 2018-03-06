@@ -55,7 +55,7 @@ class Router
 
     public static function run()
     {
-        // set default
+        // set false as default
         $routeFound = false;
 
         // iterate through all routes defined in index.php
@@ -72,13 +72,15 @@ class Router
             // preg_match function searches within self::$path for a match 
             // to the reg ex -> e.g ^/dashboard$ and saves the matches in an 
             // array called $matches
+            // # makes sure that the entire string needs to match
             if (preg_match('#' . $route['expression'] . '#', self::$path, $matches)) {
                 
                 // first element in $matches contains the entire string. 
                 // delete it through array shift thus we are able to make
                 // use of (optional) other elements later on as function parameter
+                array_shift($matches);
                 
-                // check if function is array if this is the case I assume
+                // check if function is array if this is the case we assume
                 // the route has a controller and method 
                 if (is_array($route['function'])) {
                     

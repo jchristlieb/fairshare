@@ -77,9 +77,8 @@ abstract class Model
         $table = $model->getSource();
         $pdo = $model->getPdo();
 
-        $stmt = $pdo->prepare('SELECT * FROM `' . $table . '` WHERE :column = :value LIMIT 1');
+        $stmt = $pdo->prepare('SELECT * FROM `' . $table . '` WHERE ' . $columnName . ' = :value LIMIT 1');
 
-        $stmt->bindParam(':column', $columnName);
         $stmt->bindParam(':value', $value);
         $stmt->execute();
 
