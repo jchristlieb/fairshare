@@ -58,24 +58,47 @@ class Router
         // set default
         $routeFound = false;
 
-        // search with regex whether called route matches with any defined route
+        // iterate through all routes defined in index.php
         foreach (self::$routes as $route) {
-            // Add 'find string start' automatically
+            
+            // Add infront off $route['expression'] e.g /dashboard
+            // a '^' -> this reg ex indicates the start of the string
             $route['expression'] = '^' . $route['expression'];
-            // Add 'find string end' automatically
+            
+            // Add '$' at the end of $route['expression'] 
+            // this reg ex indicates the end of the string
             $route['expression'] = $route['expression'] . '$';
-            // check match
+       
+            // preg_match function searches within self::$path for a match 
+            // to the reg ex -> e.g ^/dashboard$ and saves the matches in an 
+            // array called $matches
             if (preg_match('#' . $route['expression'] . '#', self::$path, $matches)) {
-                // always remove first element. This contains the whole string
-                array_shift($matches);
-                // check if function is array which is the way to use class method
+                
+                // first element in $matches contains the entire string. 
+                // delete it through array shift thus we are able to make
+                // use of (optional) other elements later on as function parameter
+                
+                // check if function is array if this is the case I assume
+                // the route has a controller and method 
                 if (is_array($route['function'])) {
+                    
+                    // run a new instance of assigned class as $controller
                     $controller = new $route['function'][0]();
+                  
+                    // the function calls the assigned $controller
+                    // and handsover the required method name -> $route['function'][1]
+                    // and if available further parameters within the $matches array
                     call_user_func_array([$controller, $route['function'][1]], $matches);
+                    
                 } else {
+                    // if route has no controller defined call the associated function
+                    // and pass optional parameters through $matches
                     call_user_func_array($route['function'], $matches);
                 }
+                
+                // set the found route to true
                 $routeFound = true;
+                
                 break;
 
             }
