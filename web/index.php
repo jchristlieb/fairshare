@@ -11,7 +11,7 @@ require_once dirname(__DIR__) . '/app/bootstrap.php';
 Router::init();
 
 // route to dashboard 
-Router::add('/', [\App\Controller\IndexController::class, 'index']);
+Router::add('/PhpKurs2/fairshare/web/dashboard.php', [\App\Controller\IndexController::class, 'index']);
 
 // route to expense
 Router::add('/expense', [\App\Controller\ExpenseController::class, 'index']);
