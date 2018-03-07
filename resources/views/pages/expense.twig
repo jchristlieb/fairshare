@@ -3,38 +3,51 @@
 
 
 {% block headline %}
-    <h1>Submit your expense</h1>
+    <div class="card">
+        <div class="card-header">
+            <h2>Submit an expense</h2>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="/expense/save">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Select user</label>
-            <select name="user" class="form-control">
 
-                {% for user in users %}
+        <form method="post" action="/expense/save">
 
-                    <option value="{{ user.id }}">{{ user.name }}</option>
+            <div class="form-group">
+                <label for="InputUser">Who are you?</label>
+                <select name="user" placeholder="Select a registered user" class="form-control" required>
 
-                {% endfor %}
+                    {% for user in users %}
 
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Select expense date</label>
-        <input name="date" class="form-control datepicker">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Select shop</label>
-            <input name="shop" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">How much did you spend</label>
-            <input name="amount" class="form-control">
-        </div>
+                        <option value="{{ user.id }}">{{ user.name }}</option>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                    {% endfor %}
+
+                    <option value="" selected disabled>Please select</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="InputDate">When did you buy?</label>
+                <input name="date" class="form-control datepicker" required>
+            </div>
+
+            <div class="form-group">
+                <label for="InputShop">Where did you buy?</label>
+                <input name="shop" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="InputAmount">How much did you spend</label>
+                <input name="amount" class="form-control" required>
+            </div>
+
+            <button type="submit expense" class="btn btn-primary">Submit expense</button>
+
+        </form>
+
 
 {% endblock %}
 
