@@ -10,15 +10,24 @@ require_once dirname(__DIR__) . '/app/bootstrap.php';
 
 Router::init();
 
-// route to dashboard 
+// dashboard
 Router::add('/', [\App\Controller\IndexController::class, 'index']);
 
-// route to expense
+// expense routes
 Router::add('/expense', [\App\Controller\ExpenseController::class, 'index']);
 Router::add('/expense/save', [\App\Controller\ExpenseController::class, 'save']);
 
-// route to calc fairShare
-Router::add('/calc-1', [\App\Controller\CalcController::class, 'index']);
+// calc routes
+Router::add('/calc-1', [\App\Controller\CalcController::class, 'selectUser']);
+Router::add('/calc-2', [\App\Controller\CalcController::class, 'selectTimeFrame']);
+Router::add('/calc-3', [\App\Controller\CalcController::class, 'selectDaysOff']);
+Router::add('/calc-4', [\App\Controller\CalcController::class, 'calcFairShare']);
+
+
+
+// user routes
+Router::add('/user', [\App\Controller\UserController::class, 'index']);
+Router::add('/user/save', [\App\Controller\UserController::class, 'save']);
 
 // 404page
 Router::add404(function () {
