@@ -1,0 +1,34 @@
+{% extends "/layouts/master.twig" %}
+
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Define your time frame</h2>
+            <div class="text-muted">Calculate fairShare: Step 2/4</div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <form method="post" action="/calc-3">
+        <div class="form-group">
+            <label>Select time frame for your calculation</label>
+            <select multiple class="form-control" size="10" id="UserGroup">
+
+                {% for user in users %}
+
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+
+                {% endfor %}
+
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Submit your user group</button>
+        </div>
+
+    </form>
+
+{% endblock %}

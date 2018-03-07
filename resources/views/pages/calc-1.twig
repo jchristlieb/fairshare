@@ -1,5 +1,35 @@
 {% extends "/layouts/master.twig" %}
 
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Define your time frame</h2>
+            <div class="text-muted">Calculate fairShare: Step 1/4</div>
+        </div>
+    </div>
+{% endblock %}
+
+
 {% block content %}
-    calc {{ name }}
+
+    <form method="post" action="/calc-2">
+    <div class="form-group">
+        <label>Select your user group</label>
+        <small class="form-text text-muted">Press STRG to select multiple names</small>
+        <select multiple class="form-control" size="10" id="UserGroup">
+
+            {% for user in users %}
+
+            <option value="{{ user.id }}">{{ user.name }}</option>
+
+                {% endfor %}
+
+        </select>
+    </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Submit your user group</button>
+        </div>
+
+    </form>
+
 {% endblock %}
