@@ -10,7 +10,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        User::createFakes(10);
+        //User::createFakes(10);
         echo $this->twig->render('/pages/expense.twig', ['users' => User::all()]);
     }
 
