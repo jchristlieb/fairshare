@@ -18,7 +18,11 @@ abstract class Controller
     public function __construct() 
     {
         $loader = new Twig_Loader_Filesystem(VIEW_DIR);
-        $this->twig = new \Twig_Environment($loader);
+        $this->twig = new \Twig_Environment($loader, array(
+            'debug' => true,
+        ));
+        $this->twig->addExtension(new \Twig_Extension_Debug());
+
     }
     
     protected function redirect($url)
