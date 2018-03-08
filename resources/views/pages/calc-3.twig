@@ -3,7 +3,7 @@
 {% block headline %}
     <div class="card">
         <div class="card-header">
-            <h2>Define the days off per user </h2>
+            <h2>Define days off per user </h2>
             <div class="text-muted">Calculate fairShare: Step 3/4</div>
         </div>
     </div>
@@ -12,21 +12,34 @@
 
 {% block content %}
 
-    <form method="post" action="/calc-3">
+    <form method="post" action="/calc-4">
         <div class="form-group">
-            <label>Select time frame for your calculation</label>
-            <select multiple class="form-control" size="10" id="UserGroup">
 
+            <?php
+
+            var_dump($users);
+
+
+            ?>
+
+            <ul class="list-group">
                 {% for user in users %}
 
-                    <option value="{{ user.id }}">{{ user.name }}</option>
+                    <li class="list-group-item">
+                        <div class="form-group row">
+                            <label class="col-sm-9 col-form-label">{{ user.name }}</label>
+                            <div class="col-sm-3">
+                                <input type="number" name="daysoff" class="form-control" placeholder="0">
+                            </div>
+                        </div>
+                    </li>
 
                 {% endfor %}
+            </ul>
 
-            </select>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success">Submit your user group</button>
+            <button type="submit" class="btn btn-success">Submit days off</button>
         </div>
 
     </form>
