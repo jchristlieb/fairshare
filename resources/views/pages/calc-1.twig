@@ -3,7 +3,7 @@
 {% block headline %}
     <div class="card">
         <div class="card-header">
-            <h2>Define your time frame</h2>
+            <h2>Select all users of your group</h2>
             <div class="text-muted">Calculate fairShare: Step 1/4</div>
         </div>
     </div>
@@ -16,7 +16,7 @@
     <div class="form-group">
         <label>Select your user group</label>
         <small class="form-text text-muted">Press STRG to select multiple names</small>
-        <select multiple class="form-control" size="10" id="UserGroup">
+        <select name="selected_users[]" multiple class="form-control" size="10">
 
             {% for user in users %}
 

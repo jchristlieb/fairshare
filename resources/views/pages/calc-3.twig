@@ -12,24 +12,18 @@
 
 {% block content %}
 
+
     <form method="post" action="/calc-4">
         <div class="form-group">
-
-            <?php
-
-            var_dump($users);
-
-
-            ?>
 
             <ul class="list-group">
                 {% for user in users %}
 
                     <li class="list-group-item">
                         <div class="form-group row">
-                            <label class="col-sm-9 col-form-label">{{ user.name }}</label>
+                            <label name="user_name" class="col-sm-9 col-form-label">{{ user.name }}</label>
                             <div class="col-sm-3">
-                                <input type="number" name="daysoff" class="form-control" placeholder="0">
+                                <input type="number" name="days_off[{{ user.id }}]" class="form-control" placeholder="0">
                             </div>
                         </div>
                     </li>

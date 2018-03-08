@@ -15,20 +15,26 @@
     <form method="post" action="/calc-3">
         <div class="form-group">
             <label>Select time frame for your calculation</label>
-            <select multiple class="form-control" size="10" id="UserGroup">
-
-                {% for user in users %}
-
-                    <option value="{{ user.id }}">{{ user.name }}</option>
-
-                {% endfor %}
-
-            </select>
+            <div class="input-group input-daterange">
+                <input name="start_date" type="text" class="form-control" placeholder="start date" required>
+                <div class="input-group-addon">to</div>
+                <input name="end_date" type="text" class="form-control" placeholder="end date" required>
+            </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success">Submit your user group</button>
+            <button type="submit" class="btn btn-success">Submit time frame</button>
         </div>
 
     </form>
 
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $('.input-daterange input').each(function () {
+            $(this).datepicker('clearDates');
+        });
+    </script>
 {% endblock %}

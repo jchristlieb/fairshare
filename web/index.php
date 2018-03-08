@@ -18,11 +18,10 @@ Router::add('/expense', [\App\Controller\ExpenseController::class, 'index']);
 Router::add('/expense/save', [\App\Controller\ExpenseController::class, 'save']);
 
 // calc routes
-Router::add('/calc-1', [\App\Controller\CalcController::class, 'selectUser']);
+Router::add('/calc-1', [\App\Controller\CalcController::class, 'selectUserGroup']);
 Router::add('/calc-2', [\App\Controller\CalcController::class, 'selectTimeFrame']);
 Router::add('/calc-3', [\App\Controller\CalcController::class, 'selectDaysOff']);
 Router::add('/calc-4', [\App\Controller\CalcController::class, 'calcFairShare']);
-
 
 
 // user routes
