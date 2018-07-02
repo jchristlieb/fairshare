@@ -1,0 +1,61 @@
+{% extends "/layouts/master.twig" %}
+
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Submit an expense</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+        <form method="post" action="/expense/save">
+
+            <div class="form-group">
+                <label for="InputUser">Who are you?</label>
+                <select name="user" placeholder="Select a registered user" class="form-control" required>
+
+                    {% for user in users %}
+
+                        <option value="{{ user.id }}">{{ user.name }}</option>
+
+                    {% endfor %}
+
+                    <option value="" selected disabled>Please select</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="InputDate">When did you buy?</label>
+                <input name="date" class="form-control datepicker" required>
+            </div>
+
+            <div class="form-group">
+                <label for="InputShop">Where did you buy?</label>
+                <input name="shop" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="InputAmount">How much did you spend</label>
+                <input name="amount" class="form-control" required>
+            </div>
+
+            <button type="submit expense" class="btn btn-primary">Submit expense</button>
+
+        </form>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $('.datepicker').datepicker({
+            daysOfWeekDisabled: "1,2",
+            todayHighlight: true
+        });
+    </script>
+    {% endblock %}

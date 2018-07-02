@@ -1,0 +1,25 @@
+{% extends "/layouts/master.twig" %}
+
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2><strong>{{ user.name }}</strong>, sharing is caring!</h2>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Welcome on board</h5>
+            <p class="card-text">We just registered you on fairShare with the following information:</p>
+            <ul>
+                <li><strong>Username:</strong> {{ user.name }}</li>
+                <li><strong>Email:</strong> {{ user.email }}</li>
+                <li><strong>Password:</strong> Only you know it!</li>
+            </ul>
+            <p class="card-text">Enjoy fairShare.</p>
+        </div>
+    </div>
+{% endblock %}

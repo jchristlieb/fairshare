@@ -1,0 +1,33 @@
+{% extends "/layouts/master.twig" %}
+
+
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Register a new user</h2>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <form method="post" action="/user/save">
+        <div class="form-group">
+            <label for="InputUserName">Your name</label>
+            <input name="user" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="InputEmail">Your email</label>
+            <input name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="InputEmail">Your password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button type="register user" class="btn btn-success">Get up and running</button>
+
+    </form>
+
+{% endblock %}

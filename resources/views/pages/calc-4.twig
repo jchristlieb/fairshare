@@ -1,0 +1,50 @@
+{% extends "/layouts/master.twig" %}
+
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2>FairShare result</h2>
+            <div class="text-muted">Calculate fairShare: Step 4/4</div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <h3 class="mb-3">General information</h3>
+    <ul class="list-group">
+        <li class="list-group-item">TimeFrame: {{ total_days }} days, from {{ start }} to {{ end }}</li>
+        <li class="list-group-item">Total expenses: {{ total_amount }}€</li>
+        <li class="list-group-item">Cost per day: {{ cost_per_day }}€</li>
+        <li class="list-group-item">Group member: {{ users|length }}
+
+                    ({% for user in users %}
+                        {{ user.name }}{{ loop.last ? '':', ' }}
+                    {% endfor %})
+
+        </li>
+    </ul>
+
+    <h3 class="mb-3 mt-3">Member specific information</h3>
+    <ul class="list-group">
+        {% for user in users %}
+
+            <li class="list-group-item">
+                <div class="form-group">
+                    <p><strong>{{ user.name }}</strong></p>
+                    <p>Expenses: {{ user.getTotalAmount() }} €</p>
+                    <p>Participation: {{ user.getActualDays() }} days</p>
+                    <p>FairShare: {{ user.getActualCosts() }} €</p>
+                    <p>Balance: {{ user.getBalance() }} €</p>
+                    {% for payment in user.getPayments() %}
+
+                        <p>{{ payment.getFrom().name }} pays {{ payment.getAmount() }} to {{ payment.getTo().name }}</p>
+
+                    {% endfor %}
+                </div>
+            </li>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

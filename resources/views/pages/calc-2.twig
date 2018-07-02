@@ -1,0 +1,43 @@
+{% extends "/layouts/master.twig" %}
+
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Define your time frame</h2>
+            <div class="text-muted">Calculate fairShare: Step 2/4</div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <form method="post" action="/calc-3">
+        <div class="form-group">
+            <label>Select time frame for your calculation</label>
+            <div class="input-group input-daterange">
+                <input name="start_date" type="text" class="form-control" placeholder="start date" required>
+                <div class="input-group-addon">to</div>
+                <input name="end_date" type="text" class="form-control" placeholder="end date" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Submit time frame</button>
+        </div>
+
+    </form>
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $('.input-daterange input').each(function () {
+            $(this).datepicker({
+                format: "yyyy-mm-dd"
+            });
+            $(this).datepicker('clearDates');
+        });
+    </script>
+{% endblock %}

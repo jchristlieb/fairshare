@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{ include ('sections/head.twig') }}
+
+<body>
+
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            {% block headline %}
+
+            {% endblock %}
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            {{ include ('sections/navigation.twig') }}
+        </div>
+        <div class="col-sm-8">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{{ include ('sections/footer.twig') }}
+{% block javascript %}{% endblock %}
+
+</body>
+</html>
