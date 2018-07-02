@@ -19,7 +19,7 @@ class UserController extends Controller
         // assign values from register user to User object
         $user->name = $_POST['user'];
         $user->email = $_POST['email'];
-        $user->password = $_POST['pasord'];
+        $user->password = $_POST['password'];
 
         // save $user to database
         $user->save();

@@ -10,7 +10,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        //User::createFakes(10);
+
         echo $this->twig->render('/pages/expense.twig', ['users' => User::all()]);
     }
 
@@ -23,10 +23,13 @@ class ExpenseController extends Controller
       $expense->amount = $_POST['amount'];
       $expense->shop = $_POST['shop'];
       $expense->expense_date = $this->parseDate($_POST['date']);
-
       $expense->save();
 
-      var_dump($expense);
+      // render view
+        echo $this->twig->render('/feedback/expense-submitted.twig', [
+            'expense' => Expense::returnLatestEntry(),
+            'user' => User::findById($_POST['user'])
+        ]);
     }
 
     protected function parseDate($date){

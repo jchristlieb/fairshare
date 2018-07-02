@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Library\ExpenseCalculator;
+use App\Model\Expense;
 use App\Model\User;
 use App\Library\SessionManager;
 
@@ -66,42 +68,57 @@ class CalcController extends Controller
         $session->set('days_off', $_POST['days_off']);
 
         // get user ids from session
-        $users = $session->get('selected_users');
-        echo '<h2>All user ids</h2>';
-        var_dump($users);
+        $selectedUsers = $session->get('selected_users');
 
         // get start and end date from session
         $start = $session->get('start_date');
         $end = $session->get('end_date');
 
-        echo '<h2>timeframe</h2>';
-        $timeFrame = $this->getTimeFrame($start, $end);
-        var_dump($timeFrame);
+        // get days off from session
+        $daysOff = $session->get('days_off');
 
-        echo '<h2>get all users with days off</h2>';
-        $daysoff = $session->get('days_off');
-        var_dump($daysoff);
+        // start new instance of expense calculator
+        $expenseCalculator = new ExpenseCalculator();
 
-        echo '<h2>all user objects</h2>';
+        // assign variables to expense calculator
+        $expenseCalculator
+            ->setStartDate($start)
+            ->setEndDate($end)
+            ->setUsersById($selectedUsers, $daysOff);
 
+        // get days of time frame
+        $totalDays = $expenseCalculator->getTimeFrame();
 
-        // make calculations with session data
+        // cost per day = total expenses / total days
+        $expenseCalculator->calculateCostPerDay();
 
-        echo $this->twig->render('/pages/calc-4.twig');
-    }
+        // cost per user = cost per day * user days
+        $expenseCalculator->calculateCostPerUser();
+        $expenseCalculator->sortUsers();
+        dump($expenseCalculator);
 
+        $expenseCalculator->calculatePaymentPerUser();
+        dump($expenseCalculator);
+        // get object for all users
+        $users = $expenseCalculator->getUsers();
 
-    protected function getTimeFrame($start, $end)
-    {
-        // make string to date format
-        $startDate = strtotime($start);
-        $endDate = strtotime($end);
+        // get total amount of expenses
+        $totalAmount = $expenseCalculator->getTotalAmount();
 
-        // subtract start- from end date
-        // change unit from seconds to days
-        // round to whole number
-        $timeFrame = round( ($endDate - $startDate) / (24*60*60), 0);
+        // get cost per day
+        $costPerDay = $expenseCalculator->getCostPerDay();
 
-        return $timeFrame;
+        // get number of users
+        $nrOfUsers = count($users);
+
+        echo $this->twig->render('/pages/calc-4.twig', [
+            'users' => $users,
+            'total_days' => $totalDays,
+            'cost_per_day' => $costPerDay,
+            'start' => $start,
+            'end' => $end,
+            'total_amount' => $totalAmount,
+            'nr_users' => $nrOfUsers,
+        ]);
     }
 }

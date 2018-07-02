@@ -1,0 +1,25 @@
+{% extends "/layouts/master.twig" %}
+
+{% block headline %}
+    <div class="card">
+        <div class="card-header">
+            <h2><strong>{{ user.name }}</strong>, thanks for your purchase!</h2>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">You've just submitted an expense</h5>
+            <p class="card-text">We saved it with the following information:</p>
+            <ul>
+                <li><strong>Expense:</strong> {{ expense.amount }}€</li>
+                <li><strong>Shop:</strong> {{ expense.shop }}</li>
+                <li><strong>Date:</strong> {{ expense.expense_date }}</li>
+            </ul>
+            <p class="card-text">Enjoy fairShare.</p>
+        </div>
+    </div>
+{% endblock %}

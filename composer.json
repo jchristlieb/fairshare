@@ -15,6 +15,7 @@
     "require": {
         "fzaninotto/faker": "^1.7",
         "twig/twig": "^2.0",
-        "symfony/dotenv": "^4.0"
+        "symfony/dotenv": "^4.0",
+        "symfony/var-dumper": "^4.0"
     }
 }

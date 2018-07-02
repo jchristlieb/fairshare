@@ -19,6 +19,7 @@ class Router
      */
     public static function init()
     {
+        // puts an url into scheme, host and path parts
         $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
         // if a path is set, save it into $path
         if ( isset($parsedUrl['path']) ) {

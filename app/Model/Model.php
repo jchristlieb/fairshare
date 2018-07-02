@@ -48,10 +48,21 @@ abstract class Model
         return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class($model));
     }
 
+
+    public static function returnLatestEntry()
+    {
+        $model = new static();
+        $table = $model->getSource();
+        $pdo = $model->getPdo();
+        $stmt = $pdo->prepare('SELECT * FROM `' . $table . '`ORDER BY id DESC LIMIT 1');
+        $stmt->execute();
+        return $stmt->fetchObject(get_class($model));
+    }
+
     /**
      * returns an object with the given id or false
      * @param $id
-     * @return object
+     * @return static
      */
     public static function findById($id)
     {
@@ -71,18 +82,26 @@ abstract class Model
      * returns an object with the given id or false
      * @return object
      */
-    public static function findBy($columnName, $value)
+    public static function findBy($columnName, $value, $multiple = false)
     {
         $model = new static();
         $table = $model->getSource();
         $pdo = $model->getPdo();
 
-        $stmt = $pdo->prepare('SELECT * FROM `' . $table . '` WHERE ' . $columnName . ' = :value LIMIT 1');
+        if(!$multiple){
+            $limit = ' LIMIT 1';
+        } else {
+            $limit = '';
+        }
+        $stmt = $pdo->prepare('SELECT * FROM `' . $table . '` WHERE ' . $columnName . ' = :value'.$limit);
 
         $stmt->bindParam(':value', $value);
         $stmt->execute();
 
-        return $stmt->fetchObject(get_class($model));
+        if(!$multiple){
+            return $stmt->fetchObject(get_class($model));
+        }
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class($model));
     }
 
 
@@ -96,6 +115,7 @@ abstract class Model
         if (method_exists($this, 'beforeSave')) {
             $this->beforeSave();
         }
+
         $fields = [];
         foreach ($this as $name => $val) {
             if ($val === null) {
